@@ -310,3 +310,14 @@ Run the queries in `queries.sql` on your own data and record the findings here. 
 
 ## 📄 License and data notice
 Data is provided by Sportradar under the terms of your API agreement. This project is for learning and portfolio purposes.
+
+
+---
+
+## 👥 Project Team
+
+| Name | Role |
+|---|---|
+| Abhay Chauhan | Group Lead |
+| G. Nithin | Group Member |
+| Nagamani Nittala | Group Member |
