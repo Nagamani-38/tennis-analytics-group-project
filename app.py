@@ -1,4 +1,4 @@
-"""Tennis Analytics Explorer – Streamlit front end for the PostgreSQL data. test
+"""Tennis Analytics Explorer – Streamlit front end for the PostgreSQL data.
 
 Run:  streamlit run app.py
 """
@@ -84,6 +84,17 @@ def page_home():
         df = run_query("SELECT type, COUNT(*) AS total FROM competitions "
                        "GROUP BY 1 ORDER BY 2 DESC")
         st.bar_chart(df.set_index("type"))
+
+    st.divider()
+    st.subheader("Project Team")
+
+    team = pd.DataFrame([
+        {"Name": "Abhay Chauhan", "Role": "Group Lead & Original Project Creator"},
+        {"Name": "G. Nithin", "Role": "Group Member"},
+        {"Name": "Nagamani Nittala", "Role": "Group Member"},
+    ])
+
+    st.dataframe(team, use_container_width=True, hide_index=True)
 
 
 def page_competitions():
