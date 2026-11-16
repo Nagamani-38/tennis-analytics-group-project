@@ -19,9 +19,19 @@ st.set_page_config(page_title="Tennis Analytics Explorer",
 PAGE_SIZE = 25
 
 
+
 @st.cache_resource
 def get_engine():
     """Create one shared SQLAlchemy engine."""
+    database_url = os.getenv("DATABASE_URL")
+
+    if database_url:
+        return create_engine(
+            database_url,
+            pool_pre_ping=True,
+            connect_args={"sslmode": "require"}
+        )
+
     url = URL.create(
         "postgresql+psycopg2",
         username=os.getenv("PG_USER", "postgres"),
@@ -30,9 +40,8 @@ def get_engine():
         port=int(os.getenv("PG_PORT", "5432")),
         database=os.getenv("PG_DATABASE", "tennis_db"),
     )
-    ssl = os.getenv("PG_SSLMODE")          # e.g. "require" for Neon / Supabase
-    args = {"sslmode": ssl} if ssl else {}
-    return create_engine(url, pool_pre_ping=True, connect_args=args)
+    return create_engine(url, pool_pre_ping=True)
+
 
 
 @st.cache_data(ttl=300)
