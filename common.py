@@ -72,7 +72,16 @@ def fetch_json(endpoint):
     raise RuntimeError(f"Could not fetch {endpoint} after {MAX_RETRIES} tries")
 
 
+
 def get_connection():
+    database_url = os.getenv("DATABASE_URL")
+
+    if database_url:
+        return psycopg2.connect(
+            database_url,
+            sslmode="require"
+        )
+
     return psycopg2.connect(
         host=os.getenv("PG_HOST", "localhost"),
         port=os.getenv("PG_PORT", "5432"),
