@@ -4,3 +4,4 @@ python-dotenv
 pandas
 SQLAlchemy
 streamlit
+psycopg[binary]
